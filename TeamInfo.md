@@ -6,8 +6,8 @@
 | ----------- | ---------------------- |
 | TeamID      |        Team-002        |
 | TeamName    |         team2CS411     |
-| Captain     |       Abdu Alawini     |
-| Captain     |  alawini@illinois.edu  |
+| Captain     | Kyungyeon(Claudia) Lee |
+| Captain     |     kl35@illinois.edu  |
 | Member1     |        Kevin Pei       |
 | Member1     |   kevin2@illinois.edu  |
 | Member2     |  Dattatreya Mohapatra  |
