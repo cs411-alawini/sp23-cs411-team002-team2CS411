@@ -8,10 +8,10 @@
 | TeamName    |         team2CS411     |
 | Captain     | Kyungyeon(Claudia) Lee |
 | Captain     |     kl35@illinois.edu  |
-| Member1     |        Kevin Pei       |
-| Member1     |   kevin2@illinois.edu  |
-| Member2     |  Dattatreya Mohapatra  |
-| Member2     |   datta1@illinois.edu  |
+| Member1     |                        |
+| Member1     |                        |
+| Member2     |                        |
+| Member2     |                        |
 | Member3     |                        |
 | Member3     |                        |
 
