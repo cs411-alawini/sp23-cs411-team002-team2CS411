@@ -12,8 +12,8 @@
 | Member1     |     sa60@illinois.edu  |
 | Member2     |     Anwesha Mishra     |
 | Member2     |  anwesha6@illinois.edu |
-| Member3     |                        |
-| Member3     |                        |
+| Member3     |       Cole Herrmann    |
+| Member3     |  colewh2@illinois.edu  |
 
 ## Project Information
 
