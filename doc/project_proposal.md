@@ -14,7 +14,7 @@ Realness: Our data consists of 5 CSV files that are categorized by specific grou
 Functionalities:  Our database will be formatted in MySQL, and will use Node.js to link the UI javascript dropdown menus to the MySQL data.  Our current data contains 5 tables which we will pull data from, but we also plan to add additional tables for other functionalities such as athlete’s fun facts and previous olympics results. We will have added features that allow the user to enter in their own data values like fun facts and etc; this enables users to interact with the page in a more engaging manner as they learn more about the athletes. 
 
 ## User Interface
-** Link to UI Mockup Image: https://github.com/cs411-alawini/sp23-cs411-team002-team2CS411/blob/0a1d8540e28b3d4fc590fcd2c95bcdb3021dbb8c/doc/ui%20mockup.jpg
+ > Link to UI Mockup Image: https://github.com/cs411-alawini/sp23-cs411-team002-team2CS411/blob/0a1d8540e28b3d4fc590fcd2c95bcdb3021dbb8c/doc/ui%20mockup.jpg
 
 Here is a basic potential UI mockup of our web application. The slide on the left displays our applications’s home screen when nothing is selected. The user can select their specifications with the three dropdown menus so that our application can output the player they are looking for. The second slide displays how our application can functionally output the results. With each of the three specifications chosen, the application will output a picture of the athlete if there is one that exists (All athletes will be displayed if there are multiple that fit the criteria). If they won a medal during the Tokyo Olympics, that will also be shown. This is purely just a draft of our application’s interface and is subject to change.
 
