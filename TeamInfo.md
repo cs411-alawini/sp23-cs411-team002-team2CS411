@@ -25,4 +25,4 @@
 
 ## Project Summary
 
-This is a summary of the project!
+With the title 'Tokyo Olympics Wiki', the team aims to create a Wikipedia-style platform for each athlete who participated in the Tokyo Olympics. The goal is to provide users with an interactive program where they can freely add, update, and delete information about the players, creating a supportive and engaging community. The features of the application include, but are not limited to, searching for players based on their name, team, gender, and discipline, the ability to add, update, or delete information freely, and displaying the top edited players of the week.
