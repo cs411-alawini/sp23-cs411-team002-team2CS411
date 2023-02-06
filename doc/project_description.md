@@ -21,6 +21,7 @@ Here is a basic potential UI mockup of our web application. The slide on the lef
 At the beginning of the project, we will start by working together on the basic features of the application, including learning SQL syntax and researching the capabilities of SQL. This would help us set a strong foundation for the project and gain a deeper understanding of the project's goal and what features are needed to make the application. As we get more comfortable with SQL and have a clearer understanding of the desired outcome, we will divide the work and concentrate on specific areas like the frontend and backend. In this way, we can work on our project more efficiently and effectively using the skills and expertise that each member has. 
 
 Here is a breakdown of our role distribution throughout this project term: 
+
 Phase 1: Data Cleaning + Parsing 
 	Anwesha and Claudia - Inspect the data and ensure that tables + values
 	Sai and Cole - Clean the data and eliminate any NULL or invalid data 
