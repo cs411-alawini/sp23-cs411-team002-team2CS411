@@ -3,8 +3,11 @@ import './App.css';
 import Axios from 'axios'
 
 function App() {
-  // search
+  // search - Athlete
   const [athleteName1, setAthleteName1] = useState('');
+
+  // search - Coach 
+  const [coachName1, setCoachName1] = useState('');
   // insert
   const [athleteName3, setAthleteName3] = useState('');
   const [athleteFact3, setAthleteFact3] = useState('');
@@ -12,9 +15,21 @@ function App() {
   const [athleteName4, setAthleteName4] = useState('');
   const [athleteFact4, setAthleteFact4] = useState('');
 
+  // delete
+  const [athleteName5, setAthleteName5] = useState('');
+
   const [searchAthleteList, setSearchAthleteList] = useState([
     { name: '0', discipline: '1', noc: '2' }
   ]);
+
+  const [searchCoachList, setSearchCoachList] = useState([
+    { name: '0', discipline: '1', noc: '2' , event: '0'}
+  ]);
+
+  const [searchAthleteListFact, setSearchAthleteListFact] = useState([
+    { name: '0', contents: '1'}
+  ]);
+
   const [advancedQueury1List, setAdvancedQueury1List] = useState([
     { discipline: '0', name: '1'}
   ]);
@@ -34,9 +49,9 @@ function App() {
       let result = '';
 
       for (let i = 0; i < searchAthleteList.length; i++) {
-        result += `Country: ${searchAthleteList[i].NOC}, Athlete: ${searchAthleteList[i].Name}, Discipline: ${searchAthleteList[i].Discipline}\n`;
+        result += `Country: ${searchAthleteList[i].NOC}\nAthlete: ${searchAthleteList[i].Name}\nDiscipline: ${searchAthleteList[i].Discipline}\n`;
       }
-      if (searchAthleteList.length == 0) {
+      if (searchAthleteList.length === 0) {
         alert(`athlete does not exist`);
       } else {
         alert(`Search success:\n${result}`);
@@ -44,6 +59,26 @@ function App() {
     });
   };
   
+  const submitTwo = (e) => {
+    e.preventDefault();
+    Axios.get('http://34.31.89.110:80/searchCoach', {
+      params: {
+        coachName1: coachName1,
+      },
+    }).then((response) => {
+      const searchCoachList = response.data;
+      let result = '';
+
+      for (let i = 0; i < searchCoachList.length; i++) {
+        result += `Country: ${searchCoachList[i].NOC}\nCoach: ${searchCoachList[i].Name}\nDiscipline: ${searchCoachList[i].Discipline}\nEvent: ${searchCoachList[i].Event}\n`;
+      }
+      if (searchCoachList.length === 0) {
+        alert(`${coachName1} does not exist... try again`);
+      } else {
+        alert(`Search success for ${coachName1}:\n${result}`);
+      }
+    });
+  };
   
   const submitThree = (e) => {
     e.preventDefault();
@@ -51,7 +86,25 @@ function App() {
       athleteName3: athleteName3,
       athleteFact3: athleteFact3,
     }).then(() => {
-      alert('insertion success');
+      console.log('insertion success');
+      Axios.get('http://34.31.89.110:80/searchAthleteFactInsert', {
+        params: {
+          athleteName3: athleteName3,
+        },
+      }).then((response) => {
+        const searchAthleteListFact = response.data;
+        let result = '';
+  
+        for (let i = 0; i < searchAthleteListFact.length; i++) {
+          result += `Athlete: ${searchAthleteListFact[i].AthleteName}, Content: ${searchAthleteListFact[i].Content}\n`;
+        }
+        if ((searchAthleteListFact.length == 0)) {
+          alert(`athlete does not exist`);
+        } else {
+          alert(`Insert success:\n${result}`);
+        }
+      });
+
     });
   };
 
@@ -61,7 +114,50 @@ function App() {
       athleteName4: athleteName4,
       athleteFact4: athleteFact4,
     }).then(() => {
-      alert('insertion success');
+      console.log('update success');
+      Axios.get('http://34.31.89.110:80/searchAthleteFact', {
+        params: {
+          athleteName4: athleteName4,
+        },
+      }).then((response) => {
+        const searchAthleteListFact = response.data;
+        let result = '';
+  
+        for (let i = 0; i < searchAthleteListFact.length; i++) {
+          result += `Athlete: ${searchAthleteListFact[i].AthleteName}, Content: ${searchAthleteListFact[i].Content}\n`;
+        }
+        if ((searchAthleteListFact.length === 0)) {
+          alert(`athlete does not exist`);
+        } else {
+          alert(`Update success:\n${result}`);
+        }
+      });
+    });
+  };
+
+  const submitFive = (e) => {
+    e.preventDefault();
+    Axios.post('http://34.31.89.110:80/deleteUserFact', {
+      athleteName5: athleteName5,
+    }).then(() => {
+      console.log('Deletion success');
+      Axios.get('http://34.31.89.110:80/searchAthleteFact', {
+        params: {
+          athleteName5: athleteName5,
+        },
+      }).then((response) => {
+        const searchAthleteListFact = response.data;
+        let result = '';
+  
+        for (let i = 0; i < searchAthleteListFact.length; i++) {
+          result += `Athlete: ${searchAthleteListFact[i].AthleteName}, Content: ${searchAthleteListFact[i].Content}\n`;
+        }
+        if (!(searchAthleteListFact.length === 0)) {
+          alert(`athlete does not exist`);
+        } else {
+          alert(`Deletion for ${athleteName5} is a success!\n${result}`)
+        }
+      });
     });
   };
 
@@ -103,9 +199,11 @@ function App() {
 
         <label htmlFor="input2"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "Aimee Boorman":</i></label><br />
         <label htmlFor="input2">Search for Coaches:</label>
-        <input type="text" id="input2" name="input2" />
+        <input type="text" id="input2" name="input2" onChange={(e) => {
+          setCoachName1(e.target.value);
+          } } />
 
-        <button type="submit">Submit</button><br /><br />
+        <button onClick={(e) => submitTwo(e)}>Submit</button><br /><br />
 
         <label htmlFor="input3"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "ATHLETE NAME : FUN FACT":</i></label><br />
         <label htmlFor="input3">Insert the fun fact:</label>
@@ -127,10 +225,14 @@ function App() {
           } } />
         <button onClick={(e) => submitFour(e)}>Submit</button><br /><br />
 
+
         <label htmlFor="input5"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "Serena Williams":</i></label><br />
         <label htmlFor="input5">Delete the fact:</label>
-        <input type="text" id="input5" name="input5" />
-        <button type="submit">Submit</button><br /><br />
+        <input type="text" id="input5" name="input5" onChange={(e) => {
+          setAthleteName5(e.target.value);
+          } } />
+        <button onClick={(e) => submitFive(e)}>Submit</button><br /><br />
+
         <div><p>There are many countries whose coaches do not get recognition for contributing to a nation that wins medals in these competitive games. This advanced query uses INNER JOIN and a subquery. It finds all of the coaches and connects it to the medals table so the output is only a list of coaches whose athletes have won a gold medal. We also group by the discipline of the athlete and their respective coach’s name. </p>
         <button onClick={(e) => advancedQuery1(e)}>Advanced Queury 1</button>
         </div>

@@ -67,6 +67,47 @@ app.get('/searchAthlete', function(req, res) {
   });
 });
 
+app.get('/searchCoach', function(req, res) {
+  console.log(req.query.coachName1)
+  const coachName1 = req.query.coachName1
+  connection.query("SELECT Coaches.Name, Coaches.NOC, Coaches.Discipline, Coaches.Event FROM Coaches WHERE Name = ?", [coachName1], (err, result) => {
+  //connection.query("SELECT * FROM Athletes WHERE Name = 'ABAD Nestor'", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Error retrieving data.' });
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
+
+app.get('/searchAthleteFactInsert', function(req, res) {
+  console.log(req.query.athleteName3)
+  const athleteName3 = req.query.athleteName3
+  connection.query("SELECT AthleteFacts.AthleteName, AthleteFacts.Content FROM AthleteFacts WHERE AthleteName = ?", [athleteName3], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Error retrieving data.' });
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
+app.get('/searchAthleteFact', function(req, res) {
+  console.log(req.query.athleteName4)
+  const athleteName4 = req.query.athleteName4
+  connection.query("SELECT AthleteFacts.AthleteName, AthleteFacts.Content FROM AthleteFacts WHERE AthleteName = ?", [athleteName4], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Error retrieving data.' });
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
 //search for Athlete via join Athlete and Fun Fact
 app.get('/advancedQueury1', function(req, res) {
   connection.query("SELECT distinct Athletes.Discipline, Coaches.Name FROM Coaches INNER JOIN Athletes ON Coaches.NOC = Athletes.NOC AND Coaches.Discipline = Athletes.Discipline INNER JOIN MedalsByAthlete ON Athletes.Name = MedalsByAthlete.Athlete_Name WHERE MedalsByAthlete.medal_type = 'Gold Medal' GROUP BY Athletes.Discipline, Coaches.Name", (err, result) => {
@@ -112,8 +153,8 @@ app.post('/insert', function(req, res) {
 app.post('/update', function(req, res) {
   const athleteName4 = req.body.athleteName4;
   const athleteFact4 = req.body.athleteFact4;
-  const sqlUpdate = "UPDATE AthleteFacts SET Content = ? WHERE AthleteName = ?";
-  connection.query(sqlUpdate, [0, athleteName4, athleteFact4], (err, result) => {
+  const sqlUpdate = "UPDATE AthleteFacts SET Content = ? WHERE UserId = ? AND AthleteName = ?";
+  connection.query(sqlUpdate, [athleteFact4, 0, athleteName4], (err, result) => {
     if (err) {
       console.log(err);
       res.status(500).send({ message: 'Error inserting data.' });
@@ -123,8 +164,18 @@ app.post('/update', function(req, res) {
   });
 });
 
-
-
+app.post('/deleteUserFact', function(req, res) {
+  const athleteName5 = req.body.athleteName5;
+  const sqlDelete = "DELETE FROM AthleteFacts WHERE UserId = ? AND AthleteName = ?";
+  connection.query(sqlDelete, [0, athleteName5], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ message: 'Error deleting data.' });
+    } else {
+      res.status(200).send({ message: 'Data deletion successfully.' });
+    }
+  });
+});
 
 app.listen(80, function () {
     console.log('Node app is running on port 80');
