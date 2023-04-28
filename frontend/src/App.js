@@ -1,6 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+
+import AthleteProfile from './AthleteProfile';
+
 import './App.css';
 import Axios from 'axios'
+import AthleteGrid from "./SearchGrid";
+import SearchBar from "./search"; // Import the SearchBar component
+import FactLogs from "./logs";
+
+
+const head = document.getElementsByTagName('head')[0];
+
+const Header = styled.h1`
+  font-size: 2.5rem;
+  color: #ffffff;
+  background-color: #0077b6;
+  padding: 1rem;
+  border-radius: 0;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #023e8a;
+  }
+`;
+const LogLink = styled(NavLink)`
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0077b6;
+  padding: 1rem;
+  border-radius: 0;
+
+  &:hover {
+    background-color: #023e8a;
+  }
+`;
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0077b6;
+  width: 100%;
+`;
+const Spacer = styled.div`
+  width: 5rem;
+`;
+
+
+
 
 function App() {
   // search - Athlete
@@ -37,6 +88,33 @@ function App() {
   const [advancedQueury2List, setAdvancedQueury2List] = useState([
     { losing_athlete: '0', winning_athlete: '1', discipline: '2'}
   ]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchType, setSearchType] = useState("");
+  const [searchField, setSearchField] = useState("");
+  const [country, setCountry] = useState("");
+  const [discipline, setDiscipline] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    console.log('App searchResults THIS IS FUCKIGN RUNNING:', searchResults);
+  }, [searchResults]);
+
+
+  const getSearchResults = async (searchTerm, searchType, searchField, country, discipline) => {
+    // Call your API to get the search results
+    const response = await fetch(`http://34.31.89.110:80/search?name=${searchTerm}&country=${country}&discipline=${discipline}&searchType=${searchType}&searchField=${searchField}`);
+    const data = await response.json();
+    return data;
+  };
+
+  const handleSearch = async (searchTerm, searchType, searchField, country, discipline) => {
+    const results = await getSearchResults(searchTerm, searchType, searchField, country, discipline);
+    console.log(results);
+    setSearchResults(results);
+  };
+
+
   //const [athleteFact3, setAthleteFact3] = useState('');
   const submitOne = (e) => {
     e.preventDefault();
@@ -187,64 +265,40 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Tokyo Olympics Wiki - Team 2</h1>
-      <form>
-        <label htmlFor="input1"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "Serena Williams":</i></label><br />
-        <label htmlFor="input1">Search for Athletes:</label>
-        <input type="text" id="input1" name="input1" onChange={(e) => {
-          setAthleteName1(e.target.value);
-          } } />
-          <button onClick={(e) => submitOne(e)}>Submit</button><br /><br />
+    <Router>
+      <div className="App-header">
+      <HeaderContainer>
+     
+      <Spacer />
 
-        <label htmlFor="input2"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "Aimee Boorman":</i></label><br />
-        <label htmlFor="input2">Search for Coaches:</label>
-        <input type="text" id="input2" name="input2" onChange={(e) => {
-          setCoachName1(e.target.value);
-          } } />
+    <Link to="/">
+      <Header>Tokyo Olympics Wiki - Team 2</Header>
+    </Link>
+    <LogLink to="/logs">Logs</LogLink>
+    
+  </HeaderContainer>
+  <button onClick={(e) => advancedQuery1(e)}>Advanced Queury 1</button>
+      <button onClick={(e) => advancedQuery2(e)}>Advanced Queury 2</button>
 
-        <button onClick={(e) => submitTwo(e)}>Submit</button><br /><br />
+      <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <SearchBar onSearch={handleSearch} />
+                <br></br>
+                <AthleteGrid searchResults={searchResults} />
+              </>
+            }
+            index
+          />
+          <Route path="/athlete/:name" element={<AthleteProfile />} />
+          <Route path="/logs" element={<FactLogs />} />
 
-        <label htmlFor="input3"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "ATHLETE NAME : FUN FACT":</i></label><br />
-        <label htmlFor="input3">Insert the fun fact:</label>
-        <input type="text" id="input3" name="input3" onChange={(e) => {
-        setAthleteName3(e.target.value);
-          }}/>
-        <input type="text" id="input1.5" name="input1.5" onChange={(e) => {
-          setAthleteFact3(e.target.value);
-          } } />
-        <button onClick={(e) => submitThree(e)}>Submit</button><br /><br />
-
-        <label htmlFor="input4"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "ATHLETE NAME : FUN FACT":</i></label><br />
-        <label htmlFor="input4">Update the fact:</label>
-        <input type="text" id="input4" name="input4" onChange={(e) => {
-          setAthleteName4(e.target.value);
-          }}/>
-        <input type="text" id="input4.5" name="input4.5" onChange={(e) => {
-          setAthleteFact4(e.target.value);
-          } } />
-        <button onClick={(e) => submitFour(e)}>Submit</button><br /><br />
-
-
-        <label htmlFor="input5"><i>&nbsp;&nbsp;&nbsp;&nbsp;Input format should be "Serena Williams":</i></label><br />
-        <label htmlFor="input5">Delete the fact:</label>
-        <input type="text" id="input5" name="input5" onChange={(e) => {
-          setAthleteName5(e.target.value);
-          } } />
-        <button onClick={(e) => submitFive(e)}>Submit</button><br /><br />
-
-        <div><p>There are many countries whose coaches do not get recognition for contributing to a nation that wins medals in these competitive games. This advanced query uses INNER JOIN and a subquery. It finds all of the coaches and connects it to the medals table so the output is only a list of coaches whose athletes have won a gold medal. We also group by the discipline of the athlete and their respective coach’s name. </p>
-        <button onClick={(e) => advancedQuery1(e)}>Advanced Queury 1</button>
-        </div>
-
-        <div><p>For each athlete that didn’t win a medal, we want to display the athlete that won the gold medal for that discipline. </p>
-        <button onClick={(e) => advancedQuery2(e)}>Advanced Queury 2</button>
-        </div>
-
-        
-      </form>
-    </div>
+        </Routes>
+      </div>
+    </Router>
   );
-}
-
-export default App;
+  
+ }
+ export default App;
