@@ -1,0 +1,32 @@
+.row {
+    margin: 0 -15px;
+  }
+  
+  .col {
+    padding: 0 15px;
+  }
+  
+  .col > div {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px;
+    height: 300px;
+    text-align: center;
+    background-color: pink !important;
+  }
+  
+  .col > div > img {
+    max-height: 350px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .col > div > h2 {
+    font-size: 80px;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+  }
+  
