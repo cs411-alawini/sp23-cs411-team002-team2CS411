@@ -14,6 +14,8 @@ We believe that our project is extremely useful and unique to its users. By addi
 
 ## 5. Discuss what functionalities you added or removed. Why?
 
+The core functionalities remained the same: allowing users to create, update, delete.
+
 ## 6. Explain how you think your advanced database programs complement your application.
 
 ## 7. Each team member should describe one technical challenge that the team encountered.  This should be sufficiently detailed such that another future team could use this as helpful advice if they were to start a similar project or where to maintain your project. 
