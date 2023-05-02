@@ -2,7 +2,11 @@
 
 ## 1. Please list out changes in the directions of your project if the final project is different from your original proposal (based on your stage 1 proposal submission).
 
+There was so significant change in direction from what we had originally wrote from Stage 1. We modeled our current UI very closely to what we had shown in the mockup during stage 1. Rather than only getting data from the Tokyo data set, we also used another table to add an officials table but that was to make our project more comprehensive. Something we also changed (but rather upgraded) was that users could see what fun facts they inserted as well as others.
+
 ## 2. Discuss what you think your application achieved or failed to achieve regarding its usefulness.
+
+We believe that our project is extremely useful and unique to its users. By adding a functionality that includes pictures of the athletes that played in the Tokyo Olympics, our users can not only add a fun fact to each of the athletes, but they are also able to see a picture of their athlete.
 
 ## 3. Discuss if you changed the schema or source of the data for your application
 
