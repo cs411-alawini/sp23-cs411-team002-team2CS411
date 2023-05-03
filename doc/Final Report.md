@@ -10,11 +10,15 @@ We believe that our project is extremely useful and unique to its users. By addi
 
 ## 3. Discuss if you changed the schema or source of the data for your application
 
+We added a table to our schema: the Officials table. While all of the rest of our tables came from the original Tokyo dataset, we wanted to add a table that would add to the data compatibility of the schema/project. We kept the data from the Tokyo dataset the same but we ran into an issue of having duplicates. In that case, we noticed how individuals who had the same usually had the same first and last name but they had different disciplines; this made it easier for us to parse our data and make unique values for the different tables. In one case, we had an athlete under the name "Muhammed Ali", two of which were in the same disciple for the same country so this was the only place where we had to change the original data schema a little bit. 
+
 ## 4. Discuss what you change to your ER diagram and/or your table implementations. What are some differences between the original design and the final design? Why? What do you think is a more suitable design? 
+
+Since we added an external data source, we had to alter our ER diagram to add an additional table. This table gave us a sufficient amount of entries that could be matched with all of our athletes and we could do something besides the standard relation between an athlete, their country, and discipline. We kept this as our final design because we saw clearly how many athletes belong to one coach, many athletes belong to one country, and one country can have many medals (only to name a few).
 
 ## 5. Discuss what functionalities you added or removed. Why?
 
-The core functionalities remained the same: allowing users to create, update, delete.
+The core functionalities remained the same: allowing users to create, update, delete. 
 
 ## 6. Explain how you think your advanced database programs complement your application.
 
