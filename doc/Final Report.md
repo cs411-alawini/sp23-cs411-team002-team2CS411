@@ -29,14 +29,25 @@ In our final demo, we added the functionalities for the users to select what par
 
 ## 6. Explain how you think your advanced database programs complement your application.
 
+We had a stored procedure program for each advanced query. Our first advanced program complimented our application by adding extra information that highlights the athletes that won for each event. Our programmed work so that when you clicked a specific athlete, the application will go to a different page with fun facts you can add, but also information on the athlete that won that even. We thought that this information was useful because the athletes that won first place deserve the proper recognition. Our second advanced program handled the second advanced query, which returned the coaches of athletes that won a gold medal. This program complimented our application because we wanted coaches to get the recognition they deserve. We believe that most of the user will not be searching for coaches, so we added to this program to make sure the users can learn more about the successful ones.
+
+
 ## 7. Each team member should describe one technical challenge that the team encountered.  This should be sufficiently detailed such that another future team could use this as helpful advice if they were to start a similar project or where to maintain your project. 
 
 - Claudia: We initially used SSH to connect to a shared directory in GCP, where all our files were stored. However, this method proved to be unreliable as the server would crash when more than two people were connected to it. Whenever that happens, we had to restart GCP, which caused delays in our progress, especially when working in-person. Therefore, I think it is better if each team member set up their own working directory inside GCP and connect it to the team github repository. This would allow for simultaneous work on the project without overloading the server. 
 
-- Anwesha: A technical challenge we encountered was creating relations with our tables. We knew we wanted to use the Tokyo olympic dataset but with that, we felt rather restricted by how the tables were created and how the relations were forming. Once we added our officials table, we were able to better conceptualize the tables and it really eliminated the road block that we had. 
+- Anwesha: A technical challenge we encountered was creating relations with our tables. We knew we wanted to use the Tokyo olympic dataset but with that, we felt rather restricted by how the tables were created and how the relations were forming. Once we added our officials and medals table, we were able to better conceptualize the tables and it really eliminated the road block that we had. 
+
+- Sai: On technical challenge we faced was creating the unique ids for each table. We initially made the primary keys for the athletes the names of the athletes. What we did not realize was that there are many different athletes that participated in the Olympics with the same first and last name. While our first idea to this problem was to just delete the duplicate-named athletes so that there is only one athlete for each name, we decided not to take this route as the database would be innacurate without every athlete represented. We solved this problem by making multiple primary keys. We changed the design for the athlete table so that the primary keys are the first name, last name, and the discipline they participated in. This made it so that each row was unique.
 
 ## 8. Are there other things that changed comparing the final application with the original proposal?
 
+Our final application was different form our original proposal in our UI mockup. We originally mocked up one page with the search bars, and this same page updates after a query with the resulted athletes/coaches. However, our final application added an additional page for every athlete with fun facts about them. We also added CRUD operations in this external page to add/delete/edit the facts. 
+
 ## 9. Describe future work that you think, other than the interface, that the application can improve on
 
+I think that the application can improve by implementing a working user id authentication system. The way we have it now, the user can write their ID when add a fact. However, this allows different users to have the same id. If we add a login system, this ensures that each fact has a unique id attached to it. This makes our application cleaner and also better for future querying.
+
 ## 10. Describe the final division of labor and how well you managed teamwork.
+
+The division of labor was fairly equal. While Cole was more experienced in developing web applications like these, everyone else put in the effort for the rest of the project. The way we managed teamwork was timely and coordinated. We met up often to finish up stages and everyone's tasks were always finished on time.
